@@ -1,0 +1,11 @@
+{
+  "scale_factor": 0.01,
+  "add_offset": 0.0,
+  "units": "Celsius",
+  "long_name": "Monthly Sea Surface Temperature Anomaly",
+  "_ARRAY_DIMENSIONS": [
+    "time",
+    "lat",
+    "lon"
+  ]
+}

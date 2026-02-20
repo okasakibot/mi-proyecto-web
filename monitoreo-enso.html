@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard Integral ENSO | Series y Mapas</title>
+
+    <link rel="icon" href="data:,">
+    <script src="https://cdn.jsdelivr.net/pyodide/v0.25.0/full/pyodide.js"></script>
+    <script src="https://cdn.plot.ly/plotly-2.32.0.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="static/css/monitoreo-enso.css">
+    <script src="static/js/monitoreo-enso.js" defer></script>
+
+</head>
+<body>
+
+    <div id="loader-overlay">
+        <div class="spinner"></div>
+        <div id="loading-text" style="font-weight: 600; font-size: 1.1rem;">Iniciando entorno geoespacial...</div>
+    </div>
+
+    <header>
+        <h1>Monitoreo Climático ENSO (Client-Side)</h1>
+        <p>Mapas Plate Carrée con datos superpuestos</p>
+    </header>
+
+    <div class="dashboard-layout">
+        <aside id="main-controls" style="opacity: 0.5; pointer-events: none;">
+
+            <div class="panel">
+                <h2>1. Series de Tiempo</h2>
+                <div class="form-group">
+                    <label>Rango de Años</label>
+                    <div style="display: flex; gap: 10px;">
+                        <input type="number" id="yearStart" value="1980" min="1940" max="2024">
+                        <input type="number" id="yearEnd" value="2024" min="1940" max="2024">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Índices a graficar</label>
+                    <select id="indicesSelect" multiple></select>
+                </div>
+                <button onclick="generarGrafico()">Actualizar Series</button>
+            </div>
+
+            <div class="panel">
+                <h2>2. Mapa Espacial (Sintético)</h2>
+                <p style="font-size: 0.8rem; color: #64748b; margin-top: -10px;">Distribución SST basada en la magnitud del ONI.</p>
+                <div class="form-group">
+                    <label>Seleccionar Fecha</label>
+                    <div style="display: flex; gap: 10px;">
+                        <input type="number" id="mapYear" value="1997" min="1940" max="2024" placeholder="Año">
+                        <input type="number" id="mapMonth" value="12" min="1" max="12" placeholder="Mes (1-12)">
+                    </div>
+                </div>
+                <div class="form-group">
+                        <label>Variable a graficar (Zarr)</label>
+                        <select id="varZarrSelect"></select>
+                    </div>
+                <button class="secondary" onclick="generarMapa()">Proyectar Mapa</button>
+            </div>
+
+        </aside>
+
+        <main>
+            <div class="panel">
+                <h2>Evolución Temporal</h2>
+                <div id="ts-container" class="plot-box"></div>
+            </div>
+
+            <div class="panel">
+              <h2 id="map-panel-title">Anomalía de PREC</h2>
+              <div id="map-container" class="plot-box"></div>
+          </div>
+        </main>
+    </div>
+
+</body>
+</html>

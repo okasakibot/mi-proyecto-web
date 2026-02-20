@@ -1,0 +1,11 @@
+{
+  "scale_factor": 0.01,
+  "add_offset": 0.0,
+  "units": "mm*month-1",
+  "long_name": "Monthly Precipitation Anomaly",
+  "_ARRAY_DIMENSIONS": [
+    "time",
+    "lat",
+    "lon"
+  ]
+}
